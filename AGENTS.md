@@ -148,6 +148,8 @@ Secciones de la página, en orden: Hero → 01 Esencia (`#estudio`) → 02 Servi
 - Flujo: `ContactForm` (client, `useActionState`) → `submitLead` (Server Action) → `parseLead` → `insert` en `public.leads`.
 - Seguridad: se usa la clave **publicable/anon** solo en el servidor. RLS permite únicamente `INSERT` al rol `anon` (sin `SELECT`), así que el insert no lleva `.select()`. Nunca uses la clave secreta / service_role en este proyecto.
 - Variables (`.env.local`, ver `.env.example`): `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`. Sin ellas el formulario muestra un aviso y no guarda nada.
+- La migración se aplica con `psql` (libpq de Homebrew: `/opt/homebrew/opt/libpq/bin/psql`) usando la cadena de conexión del proyecto. La contraseña de la base de datos **nunca** se guarda en el repo ni en `.env*`; la app no la necesita.
+- Para probar: enviar el formulario en local y verificar la fila en `public.leads`; borrar después las filas de prueba.
 
 ## Convenciones de código
 
@@ -168,7 +170,7 @@ Secciones de la página, en orden: Hero → 01 Esencia (`#estudio`) → 02 Servi
 - Casos de estudio (Fintech, Logística, Salud): textos y etiquetas de ejemplo.
 - Métricas del hero (`99.98%` uptime, `v4.2.1`, `build #2048`).
 - Correo `hola@vertientelabs.com`, enlace de LinkedIn y enlace de WhatsApp (`href="#"`, formato previsto `https://wa.me/<número>`; aparece en el footer y en Contacto).
-- Formulario: código listo; falta crear la tabla en Supabase y configurar `.env.local` (y las variables en el hosting).
+- Formulario: conectado y probado en local (proyecto Supabase `cmptmblsmgwtrzrzlcci`, migración aplicada). Falta configurar `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` en el hosting de producción.
 - Tercera tarjeta de Casos ("Caso 02 · Salud"): provisional hasta que el cliente indique el tercer caso.
 - Páginas propias de LaborCare y Vertiente Reader: pendientes (las tarjetas apuntan por ahora a `#contacto`).
 - Indicador "Agenda abierta para nuevos proyectos" en el pie del hero.

@@ -9,6 +9,7 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 - Formulario de contacto completo (nombre, empresa, email corporativo, sector, interés, mensaje) con validación en servidor, mensajes por campo, estado de envío y confirmación. Server Action `submitLead` que guarda en la tabla `leads` de Supabase; honeypot anti-spam.
 - Migración `supabase/migrations/20261011000000_create_leads.sql`: tabla `leads` con restricciones y RLS que solo permite insertar desde la web.
 - `.env.example` con las variables de Supabase.
+- Migración aplicada en el proyecto Supabase de producción; permisos verificados (la web solo puede insertar) y envío real probado de punta a punta.
 - Capturas de producto en `public/productos/laborcare/` y `public/productos/reader/`.
 - Dependencias: `@supabase/supabase-js`, `server-only`.
 - Hero: nuevo shader de **integración**. Flujos de datos salen de sistemas (ERP, CRM, App móvil, Web, IA, Cloud), bajan por la V y salen del vértice como un único flujo hacia "Una sola plataforma". Fondo de retícula de puntos que reacciona al cursor.
