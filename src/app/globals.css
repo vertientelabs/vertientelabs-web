@@ -304,16 +304,53 @@ section { position: relative; overflow: hidden; }
 /* =========================================================
    CTA
    ========================================================= */
-.cta { min-height: 92svh; display: flex; align-items: center; padding: 140px 0; }
+.cta { min-height: 92svh; display: flex; align-items: center; padding: clamp(110px, 12vw, 160px) 0; }
 .cta .shader { z-index: 0; }
-.cta__inner { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.cta__title { margin-top: 28px; font-family: var(--serif); font-weight: 400; font-size: clamp(64px, 11vw, 176px); line-height: 0.88; letter-spacing: -0.035em; }
+.cta__inner { display: grid; grid-template-columns: 1fr minmax(0, 600px); gap: clamp(40px, 6vw, 96px); align-items: center; }
+.cta__title { margin-top: 28px; font-family: var(--serif); font-weight: 400; font-size: clamp(60px, 8vw, 132px); line-height: 0.88; letter-spacing: -0.035em; }
 .cta__title em { color: var(--ambar); }
-.cta__lead { margin-top: 28px; max-width: 440px; color: rgba(243, 240, 233, 0.72); font-size: 18px; }
-.cta__form { margin-top: 40px; display: flex; gap: 6px; padding: 6px; border-radius: 999px; width: min(480px, 100%); }
-.cta__form input { flex: 1; min-width: 0; padding: 0 18px; background: transparent; border: 0; outline: 0; color: var(--caliza); font: 400 16px var(--sans); }
-.cta__form input::placeholder { color: rgba(243, 240, 233, 0.5); }
-.cta__form:focus-within { border-color: rgba(255, 122, 31, 0.6); }
+.cta__lead { margin-top: 28px; max-width: 440px; color: rgba(243, 240, 233, 0.72); font-size: 18px; line-height: 1.55; }
+.cta__channels { list-style: none; margin-top: 40px; display: grid; gap: 14px; max-width: 440px; }
+.cta__channels li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid rgba(243, 240, 233, 0.12); }
+.cta__channels a { font-size: 16px; transition: color 0.3s; }
+.cta__channels a:hover { color: var(--ambar); }
+
+/* Contact form */
+.lead { border-radius: var(--r-card); padding: clamp(22px, 2.6vw, 34px); color: var(--caliza); }
+.lead__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 14px; }
+.lead__field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.lead__field--full { grid-column: 1 / -1; }
+.lead__label { display: flex; justify-content: space-between; font: 500 10.5px/1 var(--mono); letter-spacing: 0.09em; text-transform: uppercase; color: rgba(243, 240, 233, 0.7); }
+.lead__label small { font-size: inherit; color: rgba(243, 240, 233, 0.4); }
+.lead input, .lead select, .lead textarea {
+  width: 100%; border-radius: var(--r-field); border: 1px solid rgba(243, 240, 233, 0.14); background: rgba(14, 13, 11, 0.42);
+  color: var(--caliza); font: 400 15px/1.4 var(--sans); padding: 13px 14px; outline: none; transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+}
+.lead textarea { resize: vertical; min-height: 112px; }
+.lead select {
+  appearance: none; -webkit-appearance: none; padding-right: 40px; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23F3F0E9' stroke-opacity='.6' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m1 1.5 5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center;
+}
+.lead select:invalid { color: rgba(243, 240, 233, 0.45); }
+.lead option { background: var(--obsidiana); color: var(--caliza); }
+.lead input::placeholder, .lead textarea::placeholder { color: rgba(243, 240, 233, 0.38); }
+.lead input:hover, .lead select:hover, .lead textarea:hover { border-color: rgba(243, 240, 233, 0.26); }
+.lead input:focus, .lead select:focus, .lead textarea:focus { border-color: var(--ambar); background: rgba(14, 13, 11, 0.6); box-shadow: 0 0 0 3px rgba(255, 122, 31, 0.18); }
+.lead [aria-invalid="true"] { border-color: #e5484d; }
+.lead__error { font-size: 12.5px; color: #ff8b8f; }
+.lead__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.lead__foot { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.lead__note { font-size: 12.5px; line-height: 1.5; color: rgba(243, 240, 233, 0.5); max-width: 260px; }
+.lead button[disabled] { opacity: 0.6; cursor: progress; transform: none; }
+.lead__status { margin-top: 14px; padding: 10px 14px; border-radius: var(--r-field); background: rgba(14, 13, 11, 0.55); border: 1px solid rgba(229, 72, 77, 0.45); font-size: 14px; color: var(--caliza); }
+.lead__status:empty { display: none; }
+.lead--done { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: clamp(32px, 4vw, 52px); }
+.lead__check { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--ambar); color: var(--obsidiana); }
+.lead__check svg { width: 26px; height: 26px; }
+.lead--done h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 4vw, 56px); line-height: 0.95; letter-spacing: -0.02em; }
+.lead--done h3 em { color: var(--ambar); }
+.lead--done p { color: rgba(243, 240, 233, 0.72); font-size: 17px; max-width: 420px; }
 
 /* =========================================================
    FOOTER
@@ -349,6 +386,7 @@ section { position: relative; overflow: hidden; }
   .head { grid-template-columns: 1fr; align-items: start; }
   .manifesto__grid { grid-template-columns: 1fr; }
   .logi { max-width: 560px; }
+  .cta__inner { grid-template-columns: 1fr; }
   .values { grid-template-columns: 1fr; }
   .value { min-height: 0; }
   .c3, .c4 { grid-template-columns: 1fr 1fr; }
@@ -365,8 +403,9 @@ section { position: relative; overflow: hidden; }
   .logi__hud { padding: 9px 11px; }
   .logi__hud strong { font-size: 22px; }
   .footer__legal { flex-direction: column; }
-  .cta__form { flex-direction: column; border-radius: var(--r-card); }
-  .cta__form input { height: 48px; }
+  .lead__grid { grid-template-columns: 1fr; }
+  .lead__foot { flex-direction: column; align-items: stretch; }
+  .lead__foot .btn { justify-content: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {

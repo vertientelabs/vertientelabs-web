@@ -6,6 +6,11 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 ## [Sin publicar]
 
 ### Añadido
+- Formulario de contacto completo (nombre, empresa, email corporativo, sector, interés, mensaje) con validación en servidor, mensajes por campo, estado de envío y confirmación. Server Action `submitLead` que guarda en la tabla `leads` de Supabase; honeypot anti-spam.
+- Migración `supabase/migrations/20261011000000_create_leads.sql`: tabla `leads` con restricciones y RLS que solo permite insertar desde la web.
+- `.env.example` con las variables de Supabase.
+- Capturas de producto en `public/productos/laborcare/` y `public/productos/reader/`.
+- Dependencias: `@supabase/supabase-js`, `server-only`.
 - Hero: nuevo shader de **integración**. Flujos de datos salen de sistemas (ERP, CRM, App móvil, Web, IA, Cloud), bajan por la V y salen del vértice como un único flujo hacia "Una sola plataforma". Fondo de retícula de puntos que reacciona al cursor.
 - `HeroSystems`: etiquetas de cristal alineadas con los flujos, a partir de la misma geometría (`FLOW`) que usa el shader.
 - Sección 01: escena 3D de logística (Three.js + React Three Fiber). Un camión se descarga en una cinta, un operario escanea cada paquete con su tablet bajo un arco lector y las cajas se apilan en un pallet que se despacha al completarse. HUD en vivo con contador de paquetes y aviso de cada escaneo.
@@ -25,6 +30,11 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 ### Eliminado
 - Hero: fondo líquido, curvas de nivel en V y tarjetas flotantes (código, uptime, build).
 - Sección 01: plano de construcción de la V (`VConstruct`), reemplazado por la escena 3D.
+
+### Cambiado (contacto, casos y footer)
+- Contacto: diseño en dos columnas (texto y canales a la izquierda, formulario de cristal a la derecha).
+- Casos: las dos primeras tarjetas son ahora los productos reales, LaborCare y Vertiente Reader. Mismo diseño.
+- Footer: la columna "Estudio" pasa a "Productos" (LaborCare, Vertiente Reader).
 
 ### Corregido
 - Sección 01: se elimina la tarjeta "¿Tienes un proyecto en mente?", que se había duplicado por error debajo de los valores.

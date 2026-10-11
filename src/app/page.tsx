@@ -5,6 +5,7 @@ import HeroSystems from "@/components/HeroSystems";
 import { HeroShader, ContourShader, AuraShader } from "@/components/Shaders";
 import { Logo, VMark } from "@/components/Logo";
 import LogisticsCard from "@/components/logistics/LogisticsCard";
+import ContactForm from "@/components/ContactForm";
 
 const SERVICES = [
   {
@@ -78,8 +79,8 @@ const STEPS = [
 ];
 
 const CASES = [
-  { tag: "Caso 04 · Fintech", line: "De 3 sistemas", em: "a uno solo.", meta: ["Plataforma web", "Integraciones", "Cloud"], tone: "sun" },
-  { tag: "Caso 03 · Logística", line: "Rutas que se", em: "corrigen solas.", meta: ["App móvil", "Tiempo real"], tone: "spring" },
+  { tag: "LaborCare · Seguridad laboral", line: "Fatiga bajo control,", em: "antes del riesgo.", meta: ["Monitoreo de sueño", "Panel gerencial", "Alertas"], tone: "sun" },
+  { tag: "Vertiente Reader · Servicios básicos", line: "Cada lectura,", em: "en tiempo real.", meta: ["Medición AMI", "Rutas", "Productividad"], tone: "spring" },
   { tag: "Caso 02 · Salud", line: "Agenda clínica", em: "sin fricción.", meta: ["Producto con IA", "Web"], tone: "amber" },
 ];
 
@@ -332,23 +333,31 @@ export default function Home() {
         <section className="cta dark" id="contacto">
           <AuraShader tone="dark" />
           <div className="wrap z cta__inner">
-            <span className="tag reveal">
-              <b>05</b> Contacto
-            </span>
-            <h2 className="cta__title reveal">
-              Menos fricción. <br />
-              <em>Más flujo.</em>
-            </h2>
-            <p className="cta__lead reveal">Cuéntanos qué quieres construir. Respondemos en menos de 48 horas con próximos pasos claros.</p>
-            <form className="cta__form glass reveal" action="#contacto">
-              <label className="sr-only" htmlFor="email">
-                Correo
-              </label>
-              <input id="email" type="email" placeholder="tu@empresa.com" autoComplete="email" />
-              <button type="submit" className="btn btn--chalk">
-                Hablemos <span aria-hidden="true">→</span>
-              </button>
-            </form>
+            <div className="cta__copy">
+              <span className="tag reveal">
+                <b>05</b> Contacto
+              </span>
+              <h2 className="cta__title reveal">
+                Menos fricción. <br />
+                <em>Más flujo.</em>
+              </h2>
+              <p className="cta__lead reveal">
+                Cuéntanos tu operación y qué quieres construir. Respondemos en menos de 48 horas con próximos pasos claros.
+              </p>
+              <ul className="cta__channels reveal">
+                <li>
+                  <span className="mono-s muted">Correo</span>
+                  <a href="mailto:hola@vertientelabs.com">hola@vertientelabs.com</a>
+                </li>
+                <li>
+                  <span className="mono-s muted">WhatsApp</span>
+                  <a href="#">Escríbenos</a>
+                </li>
+              </ul>
+            </div>
+            <div className="cta__form reveal">
+              <ContactForm />
+            </div>
           </div>
         </section>
       </main>
@@ -362,10 +371,9 @@ export default function Home() {
               <p className="muted footer__tag">Software que fluye.</p>
             </div>
             <div className="pad">
-              <span className="mono-s muted">Estudio</span>
-              <a href="#estudio">Esencia</a>
-              <a href="#proceso">Proceso</a>
-              <a href="#casos">Casos</a>
+              <span className="mono-s muted">Productos</span>
+              <a href="#casos">LaborCare</a>
+              <a href="#casos">Vertiente Reader</a>
             </div>
             <div className="pad">
               <span className="mono-s muted">Servicios</span>

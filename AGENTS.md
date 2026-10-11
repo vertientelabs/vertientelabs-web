@@ -31,6 +31,7 @@ npx tsc --noEmit     # chequeo de tipos
 - Sin Tailwind ni librerías de UI: todo el estilo vive en `src/app/globals.css`.
 - Shaders 2D con WebGL2 puro a través de `ShaderCanvas` (sin librerías).
 - Escena 3D de la sección 01 con `three` + `@react-three/fiber` (sin drei). Se carga con `next/dynamic` (`ssr: false`) solo en esa tarjeta.
+- Formulario de contacto: Server Action + Supabase (`@supabase/supabase-js`). Ver sección **Formulario y Supabase**.
 - Fuentes vía `next/font/google`: Geist, Geist Mono e Instrument Serif (normal + itálica), expuestas como `--font-geist`, `--font-geist-mono`, `--font-instrument`.
 
 ## Estructura
@@ -42,6 +43,7 @@ src/
     page.tsx          toda la página (Server Component); datos de secciones como constantes arriba
     globals.css       tokens de marca + estilos de todas las secciones
     icon.svg          favicon (V ámbar sobre obsidiana)
+    actions/contact.ts  Server Action `submitLead` (valida y guarda en Supabase)
   components/
     ShaderCanvas.tsx  canvas WebGL2 genérico (client)
     Shaders.tsx       HeroShader, ContourShader, AuraShader (client, envuelven ShaderCanvas)
@@ -53,6 +55,12 @@ src/
       LogisticsCard.tsx   tarjeta + HUD en vivo; carga la escena y la pausa fuera de pantalla (client)
       LogisticsScene.tsx  muelle de carga 3D: camión, cinta, arco escáner, operario con tablet, pallet (client)
     Logo.tsx          VMark y Logo (server)
+    ContactForm.tsx   formulario de contacto con useActionState (client)
+  lib/
+    contact.ts        opciones (sectores, intereses), límites y validación compartida
+    supabase/server.ts  cliente Supabase solo de servidor (server-only)
+public/productos/     capturas y logos de cada producto, una carpeta por producto
+supabase/migrations/  SQL de la tabla `leads` con RLS
   shaders/
     common.ts         cabecera GLSL: uniforms, paleta, simplex noise, fbm, helpers
     hero.ts           FLOW (geometría compartida) + shader de integración: flujos de datos → V → una sola plataforma
@@ -127,6 +135,20 @@ Secciones de la página, en orden: Hero → 01 Esencia (`#estudio`) → 02 Servi
 - El remolque va cerrado (paredes y techo); solo la parte trasera está abierta hacia el muelle. El cliente lo pidió así: no lo vuelvas a mostrar en corte.
 - Encuadre: `CAMERA` (posición, objetivo, fov). Verifica a 1440×900 y 390×844 que se vean el camión, el operario y el pallet completo.
 
+## Productos reales
+
+- Los únicos productos reales son **LaborCare** (monitoreo de sueño y control de fatiga; panel gerencial) y **Vertiente Reader** (servicios básicos / medición inteligente AMI; panel de eficiencia operativa).
+- La web anterior (generada con IA) listaba productos que no existen (Control, Life, Access, Vision, Logistic, Flow…). **No los uses.**
+- Capturas en `public/productos/<producto>/`. Cada producto tendrá su propia página (pendiente); las tarjetas de Casos y los enlaces del footer apuntarán ahí.
+
+## Formulario y Supabase
+
+- Campos: nombre, empresa, email corporativo, sector, interés (opcional), mensaje (opcional) + honeypot `website`.
+- Las opciones viven en `src/lib/contact.ts` y **deben coincidir** con los `CHECK` de `supabase/migrations/*_create_leads.sql`. Si cambias una, cambia la otra.
+- Flujo: `ContactForm` (client, `useActionState`) → `submitLead` (Server Action) → `parseLead` → `insert` en `public.leads`.
+- Seguridad: se usa la clave **publicable/anon** solo en el servidor. RLS permite únicamente `INSERT` al rol `anon` (sin `SELECT`), así que el insert no lleva `.select()`. Nunca uses la clave secreta / service_role en este proyecto.
+- Variables (`.env.local`, ver `.env.example`): `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`. Sin ellas el formulario muestra un aviso y no guarda nada.
+
 ## Convenciones de código
 
 - `page.tsx` es Server Component; solo los componentes con estado, efectos o WebGL llevan `"use client"`.
@@ -145,8 +167,10 @@ Secciones de la página, en orden: Hero → 01 Esencia (`#estudio`) → 02 Servi
 
 - Casos de estudio (Fintech, Logística, Salud): textos y etiquetas de ejemplo.
 - Métricas del hero (`99.98%` uptime, `v4.2.1`, `build #2048`).
-- Correo `hola@vertientelabs.com`, enlace de LinkedIn y enlace de WhatsApp (`href="#"`, formato previsto `https://wa.me/<número>`).
-- Formulario de contacto: no envía datos todavía.
+- Correo `hola@vertientelabs.com`, enlace de LinkedIn y enlace de WhatsApp (`href="#"`, formato previsto `https://wa.me/<número>`; aparece en el footer y en Contacto).
+- Formulario: código listo; falta crear la tabla en Supabase y configurar `.env.local` (y las variables en el hosting).
+- Tercera tarjeta de Casos ("Caso 02 · Salud"): provisional hasta que el cliente indique el tercer caso.
+- Páginas propias de LaborCare y Vertiente Reader: pendientes (las tarjetas apuntan por ahora a `#contacto`).
 - Indicador "Agenda abierta para nuevos proyectos" en el pie del hero.
 - Etiquetas de sistemas del hero (ERP, CRM, App móvil, Web, IA, Cloud) y "Una sola plataforma".
 - HUD de la escena 3D: "Muelle 2", contador inicial 1 248 y códigos `#VL-xxxxx` (ilustrativos).
