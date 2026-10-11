@@ -24,12 +24,13 @@ export const INTERESES = [
   "Aún no lo sé",
 ] as const;
 
-export const LIMITS = { nombre: 120, empresa: 160, email: 254, mensaje: 4000 } as const;
+export const LIMITS = { nombre: 120, empresa: 160, email: 254, telefono: 30, mensaje: 4000 } as const;
 
 export type Lead = {
   nombre: string;
   empresa: string;
   email: string;
+  telefono: string;
   sector: string;
   interes: string | null;
   mensaje: string | null;
@@ -45,6 +46,8 @@ export type ContactState = {
 };
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+// Digits with optional leading +, spaces, dots, dashes and parentheses (7–15 digits).
+const PHONE = /^\+?[\d\s().-]+$/;
 
 const text = (fd: FormData, key: string) => {
   const v = fd.get(key);
@@ -57,6 +60,7 @@ export function parseLead(fd: FormData): { lead: Lead } | { errors: Partial<Reco
     nombre: text(fd, "nombre"),
     empresa: text(fd, "empresa"),
     email: text(fd, "email").toLowerCase(),
+    telefono: text(fd, "telefono"),
     sector: text(fd, "sector"),
     interes: text(fd, "interes"),
     mensaje: text(fd, "mensaje"),
@@ -71,6 +75,11 @@ export function parseLead(fd: FormData): { lead: Lead } | { errors: Partial<Reco
 
   if (!EMAIL.test(values.email) || values.email.length > LIMITS.email) errors.email = "Revisa el formato del correo.";
 
+  const digits = values.telefono.replace(/\D/g, "").length;
+  if (!values.telefono) errors.telefono = "Escribe tu número de teléfono.";
+  else if (!PHONE.test(values.telefono) || digits < 7 || digits > 15 || values.telefono.length > LIMITS.telefono)
+    errors.telefono = "Revisa el número de teléfono.";
+
   if (!(SECTORES as readonly string[]).includes(values.sector)) errors.sector = "Selecciona un sector.";
 
   if (values.interes && !(INTERESES as readonly string[]).includes(values.interes)) errors.interes = "Selecciona una opción de la lista.";
@@ -83,6 +92,7 @@ export function parseLead(fd: FormData): { lead: Lead } | { errors: Partial<Reco
       nombre: values.nombre,
       empresa: values.empresa,
       email: values.email,
+      telefono: values.telefono,
       sector: values.sector,
       interes: values.interes || null,
       mensaje: values.mensaje || null,

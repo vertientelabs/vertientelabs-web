@@ -59,9 +59,14 @@ export default function ContactForm() {
           {errorText("empresa")}
         </label>
         <label className="lead__field">
-          <span className="lead__label">Email corporativo</span>
+          <span className="lead__label">E-mail</span>
           <input {...field("email")} type="email" placeholder="nombre@empresa.com" autoComplete="email" maxLength={LIMITS.email} required />
           {errorText("email")}
+        </label>
+        <label className="lead__field">
+          <span className="lead__label">Teléfono</span>
+          <input {...field("telefono")} type="tel" inputMode="tel" placeholder="+51 999 999 999" autoComplete="tel" maxLength={LIMITS.telefono} required />
+          {errorText("telefono")}
         </label>
         <label className="lead__field">
           <span className="lead__label">Sector</span>
@@ -75,7 +80,7 @@ export default function ContactForm() {
           </select>
           {errorText("sector")}
         </label>
-        <label className="lead__field lead__field--full">
+        <label className="lead__field">
           <span className="lead__label">
             ¿Qué te interesa? <small>Opcional</small>
           </span>

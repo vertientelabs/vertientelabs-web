@@ -7,6 +7,9 @@ import { Logo, VMark } from "@/components/Logo";
 import LogisticsCard from "@/components/logistics/LogisticsCard";
 import ContactForm from "@/components/ContactForm";
 
+// WhatsApp (Peru, +51)
+const WHATSAPP_URL = "https://wa.me/51986040205";
+
 const SERVICES = [
   {
     title: "Software a la medida",
@@ -221,7 +224,7 @@ export default function Home() {
                 <h3>
                   ¿Tienes un proyecto <em>en mente?</em>
                 </h3>
-                <p>Cuéntanos qué necesitas construir. Respondemos en menos de 48 horas con próximos pasos claros.</p>
+                <p>Cuéntanos qué necesitas construir.</p>
                 <span className="btn btn--chalk btn--sm service__btn">
                   Contáctanos <span aria-hidden="true">→</span>
                 </span>
@@ -351,7 +354,9 @@ export default function Home() {
                 </li>
                 <li>
                   <span className="mono-s muted">WhatsApp</span>
-                  <a href="#">Escríbenos</a>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                    Escríbenos
+                  </a>
                 </li>
               </ul>
             </div>
@@ -385,7 +390,9 @@ export default function Home() {
               <span className="mono-s muted">Contacto</span>
               <a href="mailto:hola@vertientelabs.com">hola@vertientelabs.com</a>
               <a href="#">LinkedIn</a>
-              <a href="#">WhatsApp</a>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                WhatsApp
+              </a>
             </div>
           </div>
           <div className="footer__mark" aria-hidden="true">

@@ -5,6 +5,12 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 
 ## [Sin publicar]
 
+### Cambiado (contacto y CTA)
+- Sección 02, tarjeta CTA: el texto queda solo en "Cuéntanos qué necesitas construir."
+- WhatsApp: los enlaces de Contacto y del footer apuntan a `https://wa.me/51986040205` (Perú) y se abren en una pestaña nueva.
+- Formulario: nuevo campo obligatorio **Teléfono** (validado en servidor) y la etiqueta "Email corporativo" pasa a "E-mail". "Sector" e "Interés" quedan lado a lado.
+- Migración `supabase/migrations/20261011120000_add_leads_telefono.sql`: columna `telefono` en `leads` y permiso de inserción para `anon`.
+
 ### Añadido
 - Formulario de contacto completo (nombre, empresa, email corporativo, sector, interés, mensaje) con validación en servidor, mensajes por campo, estado de envío y confirmación. Server Action `submitLead` que guarda en la tabla `leads` de Supabase; honeypot anti-spam.
 - Migración `supabase/migrations/20261011000000_create_leads.sql`: tabla `leads` con restricciones y RLS que solo permite insertar desde la web.

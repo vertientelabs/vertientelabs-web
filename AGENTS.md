@@ -143,7 +143,7 @@ Secciones de la página, en orden: Hero → 01 Esencia (`#estudio`) → 02 Servi
 
 ## Formulario y Supabase
 
-- Campos: nombre, empresa, email corporativo, sector, interés (opcional), mensaje (opcional) + honeypot `website`.
+- Campos: nombre, empresa, e-mail, teléfono, sector, interés (opcional), mensaje (opcional) + honeypot `website`. La columna `telefono` se añadió en `*_add_leads_telefono.sql` (nullable en BD, obligatoria en la web).
 - Las opciones viven en `src/lib/contact.ts` y **deben coincidir** con los `CHECK` de `supabase/migrations/*_create_leads.sql`. Si cambias una, cambia la otra.
 - Flujo: `ContactForm` (client, `useActionState`) → `submitLead` (Server Action) → `parseLead` → `insert` en `public.leads`.
 - Seguridad: se usa la clave **publicable/anon** solo en el servidor. RLS permite únicamente `INSERT` al rol `anon` (sin `SELECT`), así que el insert no lleva `.select()`. Nunca uses la clave secreta / service_role en este proyecto.
@@ -169,7 +169,7 @@ Secciones de la página, en orden: Hero → 01 Esencia (`#estudio`) → 02 Servi
 
 - Casos de estudio (Fintech, Logística, Salud): textos y etiquetas de ejemplo.
 - Métricas del hero (`99.98%` uptime, `v4.2.1`, `build #2048`).
-- Correo `hola@vertientelabs.com`, enlace de LinkedIn y enlace de WhatsApp (`href="#"`, formato previsto `https://wa.me/<número>`; aparece en el footer y en Contacto).
+- Correo `hola@vertientelabs.com` y enlace de LinkedIn (`href="#"`). WhatsApp ya es real: `WHATSAPP_URL` en `page.tsx` (`https://wa.me/51986040205`, Perú), usado en el footer y en Contacto.
 - Formulario: conectado y probado en local (proyecto Supabase `cmptmblsmgwtrzrzlcci`, migración aplicada). Falta configurar `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` en el hosting de producción.
 - Tercera tarjeta de Casos ("Caso 02 · Salud"): provisional hasta que el cliente indique el tercer caso.
 - Páginas propias de LaborCare y Vertiente Reader: pendientes (las tarjetas apuntan por ahora a `#contacto`).
