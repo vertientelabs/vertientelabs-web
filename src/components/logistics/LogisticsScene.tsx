@@ -229,14 +229,15 @@ function Truck({ boxGeo }: { boxGeo: THREE.BufferGeometry }) {
         <boxGeometry args={[6.2, 0.2, 0.02]} />
         <meshStandardMaterial color={COL.ambar} />
       </mesh>
-      <mesh position={[-4.35, 1.45, 1.305]}>
+      <mesh position={[-4.35, 1.45, 1.31]}>
         <planeGeometry args={[1.3, 0.94]} />
-        <meshStandardMaterial map={decal} transparent roughness={0.7} />
+        <meshStandardMaterial map={decal} transparent roughness={0.7} polygonOffset polygonOffsetFactor={-4} />
       </mesh>
-      {[-3.36, -9.44].map((x) =>
+      {/* Corner posts fully enclose the wall ends, so no faces are coplanar (avoids z-fighting). */}
+      {[-3.33, -9.46].map((x) =>
         [-1.27, 1.27].map((z) => (
           <mesh key={`${x}${z}`} position={[x, 1.3, z]} castShadow>
-            <boxGeometry args={[0.12, 2.68, 0.12]} />
+            <boxGeometry args={[0.15, 2.6, 0.15]} />
             <meshStandardMaterial color={COL.grafito} />
           </mesh>
         )),
@@ -620,6 +621,7 @@ function LogisticsScene({ onScan, active, reducedMotion }: SceneProps) {
         castShadow
         shadow-mapSize={[2048, 2048]}
         shadow-bias={-0.0004}
+        shadow-normalBias={0.03}
         shadow-camera-left={-12}
         shadow-camera-right={9}
         shadow-camera-top={8}

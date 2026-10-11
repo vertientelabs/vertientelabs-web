@@ -172,21 +172,6 @@ export default function Home() {
                   <p>{v.v}</p>
                 </article>
               ))}
-              <a href="#contacto" className="service service--cta reveal" style={{ "--i": SERVICES.length } as React.CSSProperties}>
-                <div className="service__top">
-                  <span className="mono-s">Siguiente paso</span>
-                  <span className="service__arrow" aria-hidden="true">
-                    →
-                  </span>
-                </div>
-                <h3>
-                  ¿Tienes un proyecto <em>en mente?</em>
-                </h3>
-                <p>Cuéntanos qué necesitas construir. Respondemos en menos de 48 horas con próximos pasos claros.</p>
-                <span className="btn btn--chalk btn--sm service__btn">
-                  Completar formulario <span aria-hidden="true">→</span>
-                </span>
-              </a>
             </div>
           </div>
         </section>
@@ -237,7 +222,7 @@ export default function Home() {
                 </h3>
                 <p>Cuéntanos qué necesitas construir. Respondemos en menos de 48 horas con próximos pasos claros.</p>
                 <span className="btn btn--chalk btn--sm service__btn">
-                  Completar formulario <span aria-hidden="true">→</span>
+                  Contáctanos <span aria-hidden="true">→</span>
                 </span>
               </a>
             </div>

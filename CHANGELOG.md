@@ -26,6 +26,13 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 - Hero: fondo líquido, curvas de nivel en V y tarjetas flotantes (código, uptime, build).
 - Sección 01: plano de construcción de la V (`VConstruct`), reemplazado por la escena 3D.
 
+### Corregido
+- Sección 01: se elimina la tarjeta "¿Tienes un proyecto en mente?", que se había duplicado por error debajo de los valores.
+- Escena 3D: el borde del remolque parpadeaba (caras coplanares entre paredes y postes, z-fighting). Los postes ahora envuelven los extremos de las paredes, el logotipo lateral usa `polygonOffset` y la sombra lleva `normalBias`.
+
+### Cambiado (CTA)
+- Sección 02, tarjeta de llamada a la acción: el botón pasa de "Completar formulario" a "Contáctanos".
+
 ## [0.4.0] - 2026-10-11
 
 ### Cambiado
