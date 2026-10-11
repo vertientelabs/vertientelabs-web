@@ -10,6 +10,8 @@ type Props = {
   className?: string;
   /** Upper bound for device pixel ratio; fragment-heavy shaders want less. */
   maxDpr?: number;
+  /** Duration of the uIntro ramp. */
+  introSeconds?: number;
 };
 
 const VERT = `#version 300 es
@@ -21,7 +23,7 @@ void main() { gl_Position = vec4(a, 0.0, 1.0); }`;
  * Pauses when off screen, eases the pointer, and renders a single still frame
  * when the visitor prefers reduced motion.
  */
-export default function ShaderCanvas({ frag, uniforms, className, maxDpr = 1.5 }: Props) {
+export default function ShaderCanvas({ frag, uniforms, className, maxDpr = 1.5, introSeconds = 2.4 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const uniformsRef = useRef(uniforms);
 
@@ -96,7 +98,7 @@ export default function ShaderCanvas({ frag, uniforms, className, maxDpr = 1.5 }
       gl.uniform1f(uTime, reduced ? 12 : elapsed);
       gl.uniform2f(uMouse, mouse.x, mouse.y);
       gl.uniform1f(uMouseActive, mouse.a);
-      gl.uniform1f(uIntro, reduced ? 1 : Math.min(elapsed / 2.4, 1));
+      gl.uniform1f(uIntro, reduced ? 1 : Math.min(elapsed / introSeconds, 1));
       gl.uniform1f(uScroll, scroll);
 
       const custom = uniformsRef.current;
@@ -152,7 +154,7 @@ export default function ShaderCanvas({ frag, uniforms, className, maxDpr = 1.5 }
       gl.deleteProgram(prog);
       gl.deleteBuffer(buf);
     };
-  }, [frag, maxDpr]);
+  }, [frag, maxDpr, introSeconds]);
 
   return <canvas ref={canvasRef} className={className} aria-hidden="true" />;
 }

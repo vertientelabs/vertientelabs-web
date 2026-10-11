@@ -1,7 +1,7 @@
 "use client";
 
 import ShaderCanvas from "./ShaderCanvas";
-import { heroFrag } from "@/shaders/hero";
+import { heroFrag, FLOW } from "@/shaders/hero";
 import { contoursFrag } from "@/shaders/contours";
 import { auraFrag } from "@/shaders/aura";
 
@@ -10,7 +10,7 @@ const LIGHT = { uLight: 1, uBase: [243 / 255, 240 / 255, 233 / 255] as [number, 
 const PAPER = { uLight: 1, uBase: [251 / 255, 250 / 255, 246 / 255] as [number, number, number] };
 
 export function HeroShader() {
-  return <ShaderCanvas frag={heroFrag} className="shader" maxDpr={1.25} />;
+  return <ShaderCanvas frag={heroFrag} className="shader" maxDpr={1.5} introSeconds={FLOW.introSeconds} />;
 }
 
 export function ContourShader() {

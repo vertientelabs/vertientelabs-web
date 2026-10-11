@@ -29,7 +29,8 @@ npx tsc --noEmit     # chequeo de tipos
 
 - Next.js 16 (App Router, `cacheComponents` activo), React 19, TypeScript estricto.
 - Sin Tailwind ni librerías de UI: todo el estilo vive en `src/app/globals.css`.
-- Sin three.js: los shaders se dibujan con WebGL2 puro a través de `ShaderCanvas`.
+- Shaders 2D con WebGL2 puro a través de `ShaderCanvas` (sin librerías).
+- Escena 3D de la sección 01 con `three` + `@react-three/fiber` (sin drei). Se carga con `next/dynamic` (`ssr: false`) solo en esa tarjeta.
 - Fuentes vía `next/font/google`: Geist, Geist Mono e Instrument Serif (normal + itálica), expuestas como `--font-geist`, `--font-geist-mono`, `--font-instrument`.
 
 ## Estructura
@@ -45,14 +46,16 @@ src/
     ShaderCanvas.tsx  canvas WebGL2 genérico (client)
     Shaders.tsx       HeroShader, ContourShader, AuraShader (client, envuelven ShaderCanvas)
     Nav.tsx           barra de cristal fija (client)
-    HeroFloat.tsx     tarjetas de cristal del hero con parallax (client)
+    HeroSystems.tsx   etiquetas de cristal (ERP, CRM…) al inicio de cada flujo del hero (client)
     Manifesto.tsx     frase de la sección 01 que se ilumina con el scroll (client)
     Reveal.tsx        añade .is-in a los .reveal al entrar en pantalla (client)
-    VConstruct.tsx    plano de construcción de la V en SVG (server)
+    logistics/
+      LogisticsCard.tsx   tarjeta + HUD en vivo; carga la escena y la pausa fuera de pantalla (client)
+      LogisticsScene.tsx  muelle de carga 3D: camión, cinta, arco escáner, operario con tablet, pallet (client)
     Logo.tsx          VMark y Logo (server)
   shaders/
     common.ts         cabecera GLSL: uniforms, paleta, simplex noise, fbm, helpers
-    hero.ts           V + curvas de nivel en V que fluyen al vértice + luz líquida
+    hero.ts           FLOW (geometría compartida) + shader de integración: flujos de datos → V → una sola plataforma
     contours.ts       mapa topográfico interactivo (sección Proceso)
     aura.ts           auras de atmósfera; modo oscuro con cáusticas, modo claro en esquinas
 ```
@@ -111,7 +114,18 @@ Secciones de la página, en orden: Hero → 01 Esencia (`#estudio`) → 02 Servi
 - Todo shader nuevo empieza con `${HEADER}` y usa las constantes de paleta (`OBSIDIANA`, `AMBAR`, …), no colores sueltos.
 - Rendimiento: el canvas se pausa fuera de pantalla (IntersectionObserver) y limita el DPR (`maxDpr`: 1.25 en hero/proceso, 1 en auras). Mantén las octavas de ruido bajas; `fbmSoft` (2 octavas) para movimiento líquido, `fbm` (4) solo donde haga falta detalle. Un domain-warp con muchas octavas generó un "veteado de mármol" que ensuciaba el hero.
 - Accesibilidad: con `prefers-reduced-motion` se dibuja un solo fotograma fijo y las animaciones CSS se desactivan. Si WebGL2 no está disponible, el canvas recibe `.is-fallback` (degradado CSS).
-- En el hero, la posición/tamaño de la V se calcula en el shader según el aspecto (`wide`). Las tarjetas de `HeroFloat` están posicionadas en CSS alrededor de esa V; si mueves una, revisa la otra. La V no debe recortarse (el `reveal` de la intro está desplazado bajo el vértice a propósito).
+- Hero: la idea es **integración**. Seis flujos de datos salen de sistemas (ERP, CRM, App móvil, Web, IA, Cloud), bajan hacia la V y salen del vértice como un único flujo hacia "Una sola plataforma". Fondo: retícula de puntos sobria. El cliente pidió explícitamente **no** combinar curvas de nivel con fondo líquido en el hero y un ritmo pausado (intro de 3.6 s, paquetes lentos).
+- La geometría del hero vive en `FLOW` (`src/shaders/hero.ts`) y se interpola en el GLSL; `HeroSystems` usa el mismo objeto para colocar las etiquetas. Cambia ángulos, longitudes o etiquetas solo ahí. Las etiquetas se muestran únicamente con aspecto ≥ `FLOW.wideAspect` y ancho ≥ 1000 px.
+- La V no debe recortarse (el `reveal` de la intro está desplazado bajo el vértice a propósito).
+
+## Escena 3D (sección 01)
+
+- Todo es geometría procedural (cajas, cápsulas, cilindros, `RoundedBoxGeometry`); no hay modelos externos. Colores tomados de la paleta (`COL`), `flat` (sin tone mapping) para que coincidan con la marca.
+- Simulación en un solo `useFrame` (`Dock`): pool de 20 cajas con estados `idle → belt → lift → stacked`; escaneo al cruzar `SCAN_X` (dispara `onScan`, que alimenta el HUD); pallet de 12 cajas que se despacha y se repone.
+- Reglas del React Compiler (ESLint): no mutes valores devueltos por `useMemo`/hooks ni leas `ref.current` durante el render. Usa vectores temporales a nivel de módulo (`_a`, `_b`) y objetos controlados por `ref`.
+- Rendimiento: `frameloop` pasa a `"never"` fuera de pantalla; con movimiento reducido se usa `"demand"` y la simulación se congela.
+- El remolque va cerrado (paredes y techo); solo la parte trasera está abierta hacia el muelle. El cliente lo pidió así: no lo vuelvas a mostrar en corte.
+- Encuadre: `CAMERA` (posición, objetivo, fov). Verifica a 1440×900 y 390×844 que se vean el camión, el operario y el pallet completo.
 
 ## Convenciones de código
 
@@ -134,4 +148,6 @@ Secciones de la página, en orden: Hero → 01 Esencia (`#estudio`) → 02 Servi
 - Correo `hola@vertientelabs.com`, enlace de LinkedIn y enlace de WhatsApp (`href="#"`, formato previsto `https://wa.me/<número>`).
 - Formulario de contacto: no envía datos todavía.
 - Indicador "Agenda abierta para nuevos proyectos" en el pie del hero.
+- Etiquetas de sistemas del hero (ERP, CRM, App móvil, Web, IA, Cloud) y "Una sola plataforma".
+- HUD de la escena 3D: "Muelle 2", contador inicial 1 248 y códigos `#VL-xxxxx` (ilustrativos).
 - Titular de la sección Voz ("Pensar como ingenieros. Diseñar como artistas."): pendiente de decisión del cliente.

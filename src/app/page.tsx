@@ -1,10 +1,10 @@
 import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
 import Manifesto from "@/components/Manifesto";
-import HeroFloat from "@/components/HeroFloat";
+import HeroSystems from "@/components/HeroSystems";
 import { HeroShader, ContourShader, AuraShader } from "@/components/Shaders";
 import { Logo, VMark } from "@/components/Logo";
-import VConstruct from "@/components/VConstruct";
+import LogisticsCard from "@/components/logistics/LogisticsCard";
 
 const SERVICES = [
   {
@@ -36,11 +36,6 @@ const SERVICES = [
     title: "Producto con IA",
     text: "Agentes, automatizaciones y modelos integrados exactamente donde aportan valor real.",
     icon: <path d="M12 3v3M12 18v3M3 12h3M18 12h3M12 8l1.4 2.6L16 12l-2.6 1.4L12 16l-1.4-2.6L8 12l2.6-1.4z" />,
-  },
-  {
-    title: "Cloud & DevOps",
-    text: "Infraestructura como código, despliegue continuo y observabilidad desde el primer día.",
-    icon: <path d="M7 18a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 8.5a4.75 4.75 0 0 1 0 9.5zM12 11v5M9.5 13.5 12 11l2.5 2.5" />,
   },
   {
     title: "Consultoría técnica",
@@ -105,7 +100,7 @@ export default function Home() {
         {/* ============ HERO ============ */}
         <section className="hero dark" id="inicio">
           <HeroShader />
-          <HeroFloat />
+          <HeroSystems />
           <div className="wrap hero__inner">
             <div className="hero__copy">
               <span className="chip glass intro intro--1">
@@ -161,13 +156,7 @@ export default function Home() {
                   organizaciones que necesitan que sus ideas funcionen en el mundo real.
                 </p>
               </div>
-              <figure className="vfig glass-light reveal">
-                <VConstruct />
-                <figcaption>
-                  <span className="mono-s">La V · dos trazos, un vértice</span>
-                  <span className="mono-s muted">Origen → cauce</span>
-                </figcaption>
-              </figure>
+              <LogisticsCard />
             </div>
             <div className="values">
               {VALUES.map((v, i) => (
@@ -183,6 +172,21 @@ export default function Home() {
                   <p>{v.v}</p>
                 </article>
               ))}
+              <a href="#contacto" className="service service--cta reveal" style={{ "--i": SERVICES.length } as React.CSSProperties}>
+                <div className="service__top">
+                  <span className="mono-s">Siguiente paso</span>
+                  <span className="service__arrow" aria-hidden="true">
+                    →
+                  </span>
+                </div>
+                <h3>
+                  ¿Tienes un proyecto <em>en mente?</em>
+                </h3>
+                <p>Cuéntanos qué necesitas construir. Respondemos en menos de 48 horas con próximos pasos claros.</p>
+                <span className="btn btn--chalk btn--sm service__btn">
+                  Completar formulario <span aria-hidden="true">→</span>
+                </span>
+              </a>
             </div>
           </div>
         </section>
@@ -221,6 +225,21 @@ export default function Home() {
                   </span>
                 </article>
               ))}
+              <a href="#contacto" className="service service--cta reveal" style={{ "--i": SERVICES.length } as React.CSSProperties}>
+                <div className="service__top">
+                  <span className="mono-s">Siguiente paso</span>
+                  <span className="service__arrow" aria-hidden="true">
+                    →
+                  </span>
+                </div>
+                <h3>
+                  ¿Tienes un proyecto <em>en mente?</em>
+                </h3>
+                <p>Cuéntanos qué necesitas construir. Respondemos en menos de 48 horas con próximos pasos claros.</p>
+                <span className="btn btn--chalk btn--sm service__btn">
+                  Completar formulario <span aria-hidden="true">→</span>
+                </span>
+              </a>
             </div>
           </div>
         </section>
@@ -367,7 +386,7 @@ export default function Home() {
               <span className="mono-s muted">Servicios</span>
               <a href="#servicios">Software a la medida</a>
               <a href="#servicios">Producto con IA</a>
-              <a href="#servicios">Cloud & DevOps</a>
+              <a href="#servicios">Consultoría técnica</a>
             </div>
             <div className="pad">
               <span className="mono-s muted">Contacto</span>

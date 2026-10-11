@@ -6,10 +6,25 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 ## [Sin publicar]
 
 ### Añadido
+- Hero: nuevo shader de **integración**. Flujos de datos salen de sistemas (ERP, CRM, App móvil, Web, IA, Cloud), bajan por la V y salen del vértice como un único flujo hacia "Una sola plataforma". Fondo de retícula de puntos que reacciona al cursor.
+- `HeroSystems`: etiquetas de cristal alineadas con los flujos, a partir de la misma geometría (`FLOW`) que usa el shader.
+- Sección 01: escena 3D de logística (Three.js + React Three Fiber). Un camión se descarga en una cinta, un operario escanea cada paquete con su tablet bajo un arco lector y las cajas se apilan en un pallet que se despacha al completarse. HUD en vivo con contador de paquetes y aviso de cada escaneo.
+- Dependencias: `three`, `@react-three/fiber`, `@types/three`.
 - `AGENTS.md` con las reglas de marca, la arquitectura de shaders, las convenciones y los pasos de verificación del proyecto.
 - `CHANGELOG.md`.
 - `CLAUDE.md`, que remite a `AGENTS.md` para que Claude Code siga las mismas reglas.
 - Repositorio en GitHub: `dcs-71/vertientelabs-web`.
+
+### Cambiado
+- Hero más pausado: intro de 3.6 s y paquetes de datos lentos.
+- `ShaderCanvas` acepta `introSeconds`.
+- Escena 3D: el remolque vuelve a tener pared lateral y techo (solo queda abierto por detrás, hacia el muelle), con franja ámbar y el símbolo V en el costado.
+- Sección 02: se retira "Cloud & DevOps"; "Consultoría técnica" pasa a la quinta celda y la sexta es una tarjeta de llamada a la acción oscura que lleva al formulario de contacto.
+- Footer: el enlace "Cloud & DevOps" pasa a "Consultoría técnica".
+
+### Eliminado
+- Hero: fondo líquido, curvas de nivel en V y tarjetas flotantes (código, uptime, build).
+- Sección 01: plano de construcción de la V (`VConstruct`), reemplazado por la escena 3D.
 
 ## [0.4.0] - 2026-10-11
 
