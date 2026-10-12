@@ -14,7 +14,7 @@ const instrument = Instrument_Serif({
 export const metadata: Metadata = {
   title: "Vertiente Labs · Software que fluye",
   description:
-    "Diseñamos y construimos plataformas, apps y sistemas a la medida para equipos que quieren moverse eficientemente.",
+    "Construimos plataformas, apps y sistemas a la medida para que tu equipo opere eficientemente.",
 };
 
 export const viewport: Viewport = {
