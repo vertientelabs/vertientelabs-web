@@ -395,6 +395,7 @@ section { position: relative; overflow: hidden; }
 @media (max-width: 560px) {
   .nav { top: 10px; }
   .nav__bar { height: 52px; padding: 0 6px 0 16px; }
+  .manifesto__lead { display: none; }
   .c3, .c4, .steps, .cases__grid { grid-template-columns: 1fr; }
   .case__cover { height: 400px; }
   .step { min-height: 240px; }
