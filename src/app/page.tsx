@@ -37,7 +37,7 @@ const SERVICES = [
     ),
   },
   {
-    title: "Producto con IA",
+    title: "Integraciones con IA",
     text: "Agentes, automatizaciones y modelos integrados exactamente donde aportan valor real.",
     icon: <path d="M12 3v3M12 18v3M3 12h3M18 12h3M12 8l1.4 2.6L16 12l-2.6 1.4L12 16l-1.4-2.6L8 12l2.6-1.4z" />,
   },
@@ -84,7 +84,7 @@ const STEPS = [
 const CASES = [
   { tag: "LaborCare · Seguridad laboral", line: "Fatiga bajo control,", em: "antes del riesgo.", meta: ["Monitoreo de sueño", "Panel gerencial", "Alertas"], tone: "sun" },
   { tag: "Vertiente Reader · Servicios básicos", line: "Cada lectura,", em: "en tiempo real.", meta: ["Medición AMI", "Rutas", "Productividad"], tone: "spring" },
-  { tag: "Caso 02 · Salud", line: "Agenda clínica", em: "sin fricción.", meta: ["Producto con IA", "Web"], tone: "amber" },
+  { tag: "Caso 02 · Salud", line: "Agenda clínica", em: "sin fricción.", meta: ["Integraciones con IA", "Web"], tone: "amber" },
 ];
 
 const VOICE = [
@@ -382,7 +382,7 @@ export default function Home() {
             <div className="pad">
               <span className="mono-s muted">Servicios</span>
               <a href="#servicios">Software a la medida</a>
-              <a href="#servicios">Producto con IA</a>
+              <a href="#servicios">Integraciones con IA</a>
               <a href="#servicios">Consultoría técnica</a>
             </div>
             <div className="pad">

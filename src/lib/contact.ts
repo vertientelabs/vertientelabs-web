@@ -19,7 +19,7 @@ export const INTERESES = [
   "Software a la medida",
   "Plataforma web",
   "App móvil",
-  "Producto con IA",
+  "Integraciones con IA",
   "Consultoría técnica",
   "Aún no lo sé",
 ] as const;
