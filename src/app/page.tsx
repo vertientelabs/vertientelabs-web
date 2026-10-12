@@ -248,8 +248,8 @@ export default function Home() {
                 </h2>
               </div>
               <p>
-                Cuatro movimientos, un mismo caudal. Así llevamos una idea desde la primera conversación hasta un producto
-                en producción que sigue creciendo. Mueve el cursor sobre el mapa.
+                Llevamos una idea desde la primera conversación hasta un producto en producción que sigue creciendo
+                conforme a las necesidades de tu equipo.
               </p>
             </div>
             <ol className="steps">
@@ -350,7 +350,7 @@ export default function Home() {
               <ul className="cta__channels reveal">
                 <li>
                   <span className="mono-s muted">Correo</span>
-                  <a href="mailto:hola@vertientelabs.com">hola@vertientelabs.com</a>
+                  <a href="mailto:informes@vertientelabs.com">informes@vertientelabs.com</a>
                 </li>
                 <li>
                   <span className="mono-s muted">WhatsApp</span>
@@ -388,7 +388,7 @@ export default function Home() {
             </div>
             <div className="pad">
               <span className="mono-s muted">Contacto</span>
-              <a href="mailto:hola@vertientelabs.com">hola@vertientelabs.com</a>
+              <a href="mailto:informes@vertientelabs.com">informes@vertientelabs.com</a>
               <a href="#">LinkedIn</a>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 WhatsApp

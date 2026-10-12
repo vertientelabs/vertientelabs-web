@@ -5,6 +5,10 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 
 ## [Sin publicar]
 
+### Cambiado (proceso y correo)
+- Sección 03 Proceso: el texto de introducción pasa a "Llevamos una idea desde la primera conversación hasta un producto en producción que sigue creciendo conforme a las necesidades de tu equipo." (se retira "Mueve el cursor sobre el mapa").
+- Correo de la empresa: `informes@vertientelabs.com` en Contacto, footer y el aviso del formulario (antes `hola@`).
+
 ### Cambiado (contacto y CTA)
 - Sección 02, tarjeta CTA: el texto queda solo en "Cuéntanos qué necesitas construir."
 - WhatsApp: los enlaces de Contacto y del footer apuntan a `https://wa.me/51986040205` (Perú) y se abren en una pestaña nueva.

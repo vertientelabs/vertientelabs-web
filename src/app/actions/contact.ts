@@ -21,7 +21,7 @@ export async function submitLead(_prev: ContactState, formData: FormData): Promi
     console.error("[contact] SUPABASE_URL / SUPABASE_PUBLISHABLE_KEY no configuradas");
     return {
       status: "error",
-      message: "El formulario aún no está disponible. Escríbenos a hola@vertientelabs.com.",
+      message: "El formulario aún no está disponible. Escríbenos a informes@vertientelabs.com.",
       values: { ...parsed.lead, interes: parsed.lead.interes ?? "", mensaje: parsed.lead.mensaje ?? "" },
     };
   }
