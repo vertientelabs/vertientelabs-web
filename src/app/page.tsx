@@ -108,7 +108,7 @@ export default function Home() {
           <div className="wrap hero__inner">
             <div className="hero__copy">
               <span className="chip glass intro intro--1">
-                <b>Nuevo</b> Desarrollo de productos con IA
+                <b>Nuevo</b> Desarrollo de soluciones con IA
               </span>
               <h1 className="hero__title">
                 <span className="intro intro--2">Software que</span>
@@ -388,7 +388,6 @@ export default function Home() {
             <div className="pad">
               <span className="mono-s muted">Contacto</span>
               <a href="mailto:informes@vertientelabs.com">informes@vertientelabs.com</a>
-              <a href="#">LinkedIn</a>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 WhatsApp
               </a>

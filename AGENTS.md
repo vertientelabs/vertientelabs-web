@@ -169,7 +169,7 @@ Secciones de la página, en orden: Hero → 01 Esencia (`#estudio`) → 02 Servi
 
 - Casos de estudio (Fintech, Logística, Salud): textos y etiquetas de ejemplo.
 - Métricas del hero (`99.98%` uptime, `v4.2.1`, `build #2048`).
-- Enlace de LinkedIn (`href="#"`). Ya son reales: el correo `informes@vertientelabs.com` (Contacto, footer y aviso de `actions/contact.ts`) y WhatsApp, `WHATSAPP_URL` en `page.tsx` (`https://wa.me/51986040205`, Perú), usado en el footer y en Contacto.
+- Sin LinkedIn por ahora (se retiró del footer). Ya son reales: el correo `informes@vertientelabs.com` (Contacto, footer y aviso de `actions/contact.ts`) y WhatsApp, `WHATSAPP_URL` en `page.tsx` (`https://wa.me/51986040205`, Perú), usado en el footer y en Contacto.
 - Formulario: conectado y probado en local (proyecto Supabase `cmptmblsmgwtrzrzlcci`, migración aplicada). Falta configurar `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` en el hosting de producción.
 - Tercera tarjeta de Casos ("Caso 02 · Salud"): provisional hasta que el cliente indique el tercer caso.
 - Páginas propias de LaborCare y Vertiente Reader: pendientes (las tarjetas apuntan por ahora a `#contacto`).

@@ -6,6 +6,8 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 ## [Sin publicar]
 
 ### Cambiado (proceso y correo)
+- Hero: la etiqueta pasa a "Nuevo · Desarrollo de soluciones con IA".
+- Footer: se retira el enlace de LinkedIn.
 - "Producto con IA" pasa a "Integraciones con IA" en Servicios, la etiqueta del Caso 02, el footer y la opción de interés del formulario. Migración `supabase/migrations/20261011180000_rename_interes_integraciones_ia.sql` para el `CHECK` de `leads.interes`.
 - Hero: el texto de apoyo pasa a "Construimos plataformas, apps y sistemas a la medida para que tu equipo opere eficientemente." La meta descripción (`layout.tsx`) usa el mismo texto.
 - Sección 03 Proceso: el texto de introducción pasa a "Llevamos una idea desde la primera conversación hasta un producto en producción que sigue creciendo conforme a las necesidades de tu equipo." (se retira "Mueve el cursor sobre el mapa").
