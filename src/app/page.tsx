@@ -115,8 +115,7 @@ export default function Home() {
                 <em className="intro intro--3">fluye.</em>
               </h1>
               <p className="hero__lead intro intro--4">
-                Diseñamos y construimos plataformas, apps y sistemas a la medida para equipos que quieren moverse
-                eficientemente.
+                Construimos plataformas, apps y sistemas a la medida para que tu equipo opere eficientemente.
               </p>
               <div className="hero__ctas intro intro--5">
                 <a href="#contacto" className="btn btn--chalk">
